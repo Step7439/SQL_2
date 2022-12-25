@@ -25,27 +25,12 @@ public class RepositoryJDBC {
         this.jdbcTemplate = jdbcTemplate;
     }
     public Person getProductName(String name){
-        //String sql = read("schema.sql");
-        //String sql = "SELECT * FROM customers WHERE customers.name = :name";
         String sql = read("schema.sql");
-//        SqlParameterSource parameterSource = new MapSqlParameterSource("name", name);
-//        return template.queryForObject(sql, parameterSource, (rs, rowNum) ->
-//        {
-//            Person person = new Person();
-//            person.setId(rs.getLong("id"));
-//            person.setName(rs.getString("name"));
-//            person.setSurname(rs.getString("surname"));
-//            person.setAge(rs.getInt("age"));
-//            //person.setPhoneNumber(rs.getString("phoneNumber"));
-//           // person.setProduct_name(rs.getString("product_name"));
-//            return person;
-//        });
+
         SqlParameterSource parameterSource = new MapSqlParameterSource("name", name);
-       // return (Person) jdbcTemplate.query(sql, parameterSource.getParameterNames(), new BeanPropertyRowMapper<>(Person.class));
-        return namedParameterJdbcTemplate.query(sql, parameterSource,new BeanPropertyRowMapper<>(Person.class))
+       return namedParameterJdbcTemplate.query(sql, parameterSource,new BeanPropertyRowMapper<>(Person.class))
                 .stream().findAny().orElse(null);
     }
-
     public static String read(String scriptFileName) {
         try (InputStream is = new ClassPathResource(scriptFileName).getInputStream();
              BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is))) {
