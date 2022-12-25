@@ -24,7 +24,7 @@ public class RepositoryJDBC {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
         this.jdbcTemplate = jdbcTemplate;
     }
-    public Person getProductName(long id){
+    public Person getProductName(String name){
         //String sql = read("schema.sql");
         //String sql = "SELECT * FROM customers WHERE customers.name = :name";
         String sql = read("schema.sql");
@@ -40,7 +40,7 @@ public class RepositoryJDBC {
 //           // person.setProduct_name(rs.getString("product_name"));
 //            return person;
 //        });
-        SqlParameterSource parameterSource = new MapSqlParameterSource("id", id);
+        SqlParameterSource parameterSource = new MapSqlParameterSource("name", name);
        // return (Person) jdbcTemplate.query(sql, parameterSource.getParameterNames(), new BeanPropertyRowMapper<>(Person.class));
         return namedParameterJdbcTemplate.query(sql, parameterSource,new BeanPropertyRowMapper<>(Person.class))
                 .stream().findAny().orElse(null);
