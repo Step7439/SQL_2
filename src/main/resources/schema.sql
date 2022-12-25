@@ -1,4 +1,1 @@
-select product_name
-from orders
-         join customers c on c.id = orders.customer_id
-where name = :name;
+SELECT * FROM customers c WHERE c.id = :id

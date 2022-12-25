@@ -15,8 +15,8 @@ public class ControlJDBC {
         this.repositoryJDBC = repositoryJDBC;
     }
 
-    @GetMapping("/")
-    public Person getSqlSetup(@RequestParam String name) {
-        return repositoryJDBC.getProductName(name);
+    @GetMapping("/products/fetch-product")
+    public Person getSqlSetup(@RequestParam long id) {
+        return repositoryJDBC.getProductName(id);
     }
 }
